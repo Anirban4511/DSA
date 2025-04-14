@@ -1,5 +1,3 @@
-/*This is the reverse of a linked list using recursion*/
-
 #include <bits/stdc++.h>
 using namespace std;
 struct node
@@ -32,7 +30,6 @@ void create(vector<int> &nums)
         }
     }
 }
-
 struct node *reverse(struct node *head)
 {
     struct node *prev, *newhead, *curr;
@@ -52,6 +49,36 @@ struct node *reverse(struct node *head)
     prev->link = NULL;
     return newhead;
 }
+void resultLL(struct node *head)
+{
+    struct node *newhead = reverse(head);
+    int val, quo, carry, rem;
+    struct node *temp = newhead;
+    while (temp != NULL)
+    {
+        if (quo == 0)
+        {
+            break;
+        }
+        val = temp->data;
+        if (temp == head)
+        {
+            val += 1;
+        }
+        else
+        {
+            val += quo;
+        }
+        if (val > 9)
+        {
+            quo = val / 10;
+            rem = val % 10;
+        }
+        temp->data = rem;
+    }
+    head=reverse(newhead);
+    
+}
 
 void display()
 {
@@ -59,16 +86,16 @@ void display()
     while (ptr != NULL)
     {
         cout << ptr->data << " ";
-        cout << ptr->link << " ";
         ptr = ptr->link;
     }
 }
 int main()
 {
-    vector<int> nums = {1, 2, 3, 4, 5, 6};
+    vector<int> nums = {1, 2, 3, 4};
     create(nums);
     display();
-    head = reverse(head);
-    cout << endl;
+    cout<<endl;
+    resultLL(head);
     display();
+
 }

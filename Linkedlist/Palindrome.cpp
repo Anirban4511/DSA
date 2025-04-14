@@ -85,7 +85,7 @@ void display()
 }
 int main()
 {
-    vector<int> nums = {1, 2, 1, 1,2,1};
+    vector<int> nums = {1, 2, 3,3,2,4};
     create(nums);
     display();
     cout<<endl;
