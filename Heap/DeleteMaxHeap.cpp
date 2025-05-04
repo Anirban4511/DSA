@@ -16,13 +16,34 @@ private:
             heapifyUp(parent);
         }
     }
-
+    void heapifyBoth(int index,int size)
+    {
+        int left=2*index+1;
+        int right=2*index+2;
+        if(left<size && heap[index]<heap[left])
+        {
+            swap(heap[index],heap[left]);
+            heapifyBoth(left,size);
+        }
+        if(right<size && heap[index]<heap[right])
+        {
+            swap(heap[index],heap[right]);
+            heapifyBoth(right,size);
+        }
+    }
 public:
     void insert(int value) {
         heap.push_back(value);        // Step 1: Add to the end
         heapifyUp(heap.size() - 1);   // Step 2: Restore heap property
     }
-
+    void deletefromHeap()//means delete the root node from the heap
+    {
+        if(heap.size()==0)cout<<"Heap is empty";
+        int size=heap.size();
+        heap[0]=heap[size-1];
+        size--;
+        heapifyBoth(0,size);
+    }
     void display() {
         cout << "Heap array: ";
         for (int val : heap)
@@ -38,6 +59,8 @@ int main() {
     h.insert(5);
     h.insert(30);
     h.insert(60);
-    h.display();  // Output: Heap array: 30 20 5 10
+    h.display();  
+    h.deletefromHeap();
+    h.display();
     return 0;
 }
